@@ -112,7 +112,7 @@ const QRScanner = ({ onScan }) => {
       try{
 
         stream = await navigator.mediaDevices.getUserMedia({
-          video:{ facingMode:"environment" }
+          video: true
         })
 
         videoRef.current.srcObject = stream
@@ -189,9 +189,10 @@ const QRScanner = ({ onScan }) => {
       <div className="flex-1 flex items-center justify-center">
 
         <video
-          ref={videoRef}
-          className="absolute opacity-60"
-        />
+  	   ref={videoRef}
+  	   className="absolute inset-0 w-full h-full object-cover opacity-60 -z-10"
+  	   style={{ pointerEvents: "none" }}
+	/>
 
         <canvas
           ref={canvasRef}
@@ -202,7 +203,7 @@ const QRScanner = ({ onScan }) => {
 
       </div>
 
-      <div className="p-6">
+      <div className="p-6 relative z-10">
 
         {error && (
           <div className="bg-red-800 p-3 rounded mb-4 flex gap-2">
